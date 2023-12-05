@@ -1,5 +1,5 @@
 import { User } from "../types/user";
-import wrapPromise, { Suspended } from "../utils/promise";
+import { wrapPromise, Suspended } from "../utils/promise";
 
 export function getUserList(): Suspended<User[]> {
   const result = fetch("https://jsonplaceholder.typicode.com/users")

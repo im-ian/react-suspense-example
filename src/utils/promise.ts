@@ -1,6 +1,6 @@
 export type Suspended<T> = () => T | null;
 
-export default function wrapPromise<T>(promise: Promise<T>): Suspended<T> {
+export function wrapPromise<T>(promise: Promise<T>): Suspended<T> {
   let status: "pending" | "error" | "success" = "pending";
   let result: T | null = null;
   let error: Error | null = null;
