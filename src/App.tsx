@@ -1,19 +1,15 @@
+import { Suspense } from "react";
+
+import UserList from "./components/UserList";
+import { getUserList } from "./services/user";
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <h2>User List</h2>
+        <UserList userList={getUserList()} />
+      </Suspense>
     </div>
   );
 }
