@@ -8,3 +8,11 @@ export function getUserList(): Suspended<User[]> {
 
   return wrapPromise(result);
 }
+
+export function getUser(index: number): Suspended<User> {
+  const result = fetch(
+    `https://jsonplaceholder.typicode.com/users/${index}`
+  ).then((res) => res.json());
+
+  return wrapPromise(result);
+}

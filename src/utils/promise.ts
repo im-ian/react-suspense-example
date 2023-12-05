@@ -1,4 +1,7 @@
-export type Suspended<T> = () => T | null;
+// export type Suspended<T> = () => T | null;
+export type Suspended<T> = {
+  read: () => T | null;
+};
 
 export function wrapPromise<T>(promise: Promise<T>): Suspended<T> {
   let status: "pending" | "error" | "success" = "pending";
@@ -16,16 +19,18 @@ export function wrapPromise<T>(promise: Promise<T>): Suspended<T> {
     }
   );
 
-  return function () {
-    switch (status) {
-      case "pending":
-        throw suspender;
-      case "error":
-        throw error;
-      case "success":
-        return result;
-      default:
-        throw suspender;
-    }
+  return {
+    read() {
+      switch (status) {
+        case "pending":
+          throw suspender;
+        case "error":
+          throw error;
+        case "success":
+          return result;
+        default:
+          throw suspender;
+      }
+    },
   };
 }

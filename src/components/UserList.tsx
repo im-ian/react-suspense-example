@@ -1,16 +1,19 @@
-import { User } from "../types/user";
-import { Suspended } from "../utils/promise";
+import { getUserList } from "../services/user";
 
 interface UserListProps {
-  userList: Suspended<User[]>;
+  onUserClick: (id: number) => void;
 }
 
-function UserList({ userList }: UserListProps) {
+function UserList({ onUserClick }: UserListProps) {
+  const userList = getUserList().read();
+
   return (
     <ul>
-      {userList()?.map((user) => (
+      {(userList || []).map((user) => (
         <li key={user.id}>
-          {user.company.name} {user.name} {user.phone}
+          <p style={{ cursor: "pointer" }} onClick={() => onUserClick(user.id)}>
+            {user.company.name} {user.name} {user.phone}
+          </p>
         </li>
       ))}
     </ul>
