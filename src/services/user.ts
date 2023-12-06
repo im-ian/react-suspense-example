@@ -4,13 +4,12 @@ import { wrapPromise } from "../utils/promise";
 
 export function getUserList() {
   const result = fetcher<User[]>("https://jsonplaceholder.typicode.com/users");
-  return wrapPromise(result);
+  return result;
 }
 
 export function getUser(index: number) {
   const result = fetcher<User>(
     `https://jsonplaceholder.typicode.com/users/${index}`
   );
-
-  return wrapPromise(result);
+  return result;
 }
