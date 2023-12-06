@@ -1,11 +1,11 @@
 export type Suspended<T> = {
-  read: () => T | null;
+  read: () => T;
 };
 
 export function wrapPromise<T>(promise: Promise<T>): Suspended<T> {
   let status: "pending" | "error" | "success" = "pending";
-  let result: T | null = null;
-  let error: Error | null = null;
+  let result: T;
+  let error: Error;
 
   const suspender = promise.then(
     (r) => {
