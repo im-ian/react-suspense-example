@@ -1,18 +1,16 @@
+import { fetcher } from "./fetch";
 import { User } from "../types/user";
-import { wrapPromise, Suspended } from "../utils/promise";
+import { wrapPromise } from "../utils/promise";
 
-export function getUserList(): Suspended<User[]> {
-  const result = fetch("https://jsonplaceholder.typicode.com/users")
-    .then((res) => res.json())
-    .then((data) => data);
-
+export function getUserList() {
+  const result = fetcher<User[]>("https://jsonplaceholder.typicode.com/users");
   return wrapPromise(result);
 }
 
-export function getUser(index: number): Suspended<User> {
-  const result = fetch(
+export function getUser(index: number) {
+  const result = fetcher<User>(
     `https://jsonplaceholder.typicode.com/users/${index}`
-  ).then((res) => res.json());
+  );
 
   return wrapPromise(result);
 }

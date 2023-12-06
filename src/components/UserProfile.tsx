@@ -5,7 +5,7 @@ interface UserProps {
 }
 
 function UserProfile({ userId }: UserProps) {
-  const userData = getUser(userId).read();
+  const userData = getUser(userId);
 
   return <div>{JSON.stringify(userData)}</div>;
 }
