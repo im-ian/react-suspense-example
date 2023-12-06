@@ -1,4 +1,3 @@
-// export type Suspended<T> = () => T | null;
 export type Suspended<T> = {
   read: () => T | null;
 };
